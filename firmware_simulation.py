@@ -22,17 +22,22 @@ class MotorController:
             return {"status":"Error", "message": "Empty command"}
         
         elif command.startswith("Set speed:"):
-            speed = int(command.split(":")[1])
 
-            if speed<0 or speed>101:
-                logging.error(f"Error: speed out of range")
-                return {"status":"Error", "message":"Speed out of range"}
+            try:
+                speed = int(command.split(":")[1])
 
-            self.motor_speed = speed
+                if speed<0 or speed>101:
+                    logging.error(f"Error: speed out of range")
+                    return {"status":"Error", "message":"Speed out of range"}
 
-            logging.info(f"Success: speed equals {speed}")
-            return {"status":"Success", "message":"Speed equals {speed}"}
-            
+                self.motor_speed = speed
+
+                logging.info(f"Success: speed equals {speed}")
+                return {"status":"Success", "message":"Speed equals {speed}"}
+            except ValueError:
+                
+                logging.error(f"Error: Invalid format '{command}'")
+                return {"status": "Error", "message":"Invalid data type"}
 
         else:
             logging.warning(f"Unknown command {command}")

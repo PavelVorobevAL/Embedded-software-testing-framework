@@ -3,7 +3,7 @@ from firmware_simulation import MotorController
 
 @pytest.fixture
 def controller():
-    return MotorController
+    return MotorController()
 
 
 def test_valid_speed1(controller):
