@@ -13,22 +13,28 @@ class MotorController:
         self.motor_speed = 0
 
 
-    def process_comand(self, command: str) -> dict:
+    def process_command(self, command: str) -> dict:
 
         logging.info(f"Command: {command}")
 
         if command == "":
             logging.error(f"Error: Empty command")
-            return {"status":"Error: Empty command"}
+            return {"status":"Error", "message": "Empty command"}
         
-        elif command.startswith("Set speed: "):
+        elif command.startswith("Set speed:"):
             speed = int(command.split(":")[1])
 
             if speed<0 or speed>101:
                 logging.error(f"Error: speed out of range")
-                return {"satus":"Error: speed out of range"}
+                return {"status":"Error", "message":"Speed out of range"}
+
+            self.motor_speed = speed
+
+            logging.info(f"Success: speed equals {speed}")
+            return {"status":"Success", "message":"Speed equals {speed}"}
+            
 
         else:
             logging.warning(f"Unknown command {command}")
-            return {"status":"Uncknown command"}
+            return {"status":"Unknown command", "message":"Unknown command {command}"}
 
