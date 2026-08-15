@@ -6,15 +6,15 @@ def controller():
     return MotorController
 
 
-def test_valid_speed1():
+def test_valid_speed1(controller):
     test=controller.process_command("Set speed: 75")
     assert test["status"] == "Success"
 
 
-def test_valid_speed2():
+def test_valid_speed2(controller):
     test=controller.process_command("Set speed: 102")
     assert test["status"] == "Error"
 
-def test_valid_type_value():
+def test_valid_type_value(controller):
     test=controller.process_command("Set speed: text")
     assert test["status"] == "Error"
