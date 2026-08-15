@@ -1,5 +1,12 @@
 import logging
 
+logging.basicConfig(
+        filename="device.log",
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s'
+)
+
+
 class MotorController:
 
     def __init__(self):
